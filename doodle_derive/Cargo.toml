@@ -12,9 +12,9 @@ include = [
 readme = "README.md"
 license = "MIT"
 description = "Implementation of #[derive(Schema)]"
-homepage = "TBA"
+homepage = "https://github.com/snorrwe/doodle-rs"
 repository = "https://github.com/snorrwe/doodle-rs"
-documentation = "TBA"
+documentation = "https://github.com/snorrwe/doodle-rs"
 keywords = ["serialization"]
 
 [lib]

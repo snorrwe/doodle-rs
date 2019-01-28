@@ -6,7 +6,16 @@ edition = "2018"
 include = [
     "**/*.rs",
     "Cargo.toml",
+    "LICENCE",
+    "README.md",
 ]
+readme = "README.md"
+license = "MIT"
+description = "Doodle is a Schema documentation helper library"
+homepage = "https://github.com/snorrwe/doodle-rs"
+repository = "https://github.com/snorrwe/doodle-rs"
+documentation = "https://github.com/snorrwe/doodle-rs"
+keywords = ["serialization"]
 
 [dependencies]
 serde_json = "1.0"
