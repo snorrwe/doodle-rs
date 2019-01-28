@@ -1,0 +1,7 @@
+[workspace]
+
+members = [
+    "schema",
+    "schema_derive",
+    "schema_example",
+]
