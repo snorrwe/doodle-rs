@@ -6,7 +6,16 @@ edition = "2018"
 include = [
     "**/*.rs",
     "Cargo.toml",
+    "LICENCE",
+    "README.md",
 ]
+readme = "README.md"
+license = "MIT"
+description = "Implementation of #[derive(Schema)]"
+homepage = "TBA"
+repository = "https://github.com/snorrwe/doodle-rs"
+documentation = "TBA"
+keywords = ["serialization"]
 
 [lib]
 proc-macro = true
