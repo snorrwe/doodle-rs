@@ -1,12 +1,9 @@
 [package]
-name = "schema_derive"
+name = "doodle_example"
 version = "0.1.0"
 authors = ["Daniel Kiss <littlesnorrboy@gmail.com>"]
 edition = "2018"
-
-[lib]
-proc-macro = true
+publish = false
 
 [dependencies]
-syn = "0.15"
-quote = "0.6"
+doodle = { path = "../doodle" }

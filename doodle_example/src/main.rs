@@ -1,6 +1,6 @@
-extern crate schema;
+extern crate doodle;
 
-use schema::*;
+use doodle::*;
 
 #[derive(Schema)]
 struct Foo {

@@ -1,7 +1,7 @@
 [workspace]
 
 members = [
-    "schema",
-    "schema_derive",
-    "schema_example",
+    "doodle",
+    "doodle_derive",
+    "doodle_example",
 ]

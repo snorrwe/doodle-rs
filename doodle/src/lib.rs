@@ -1,8 +1,8 @@
 #[macro_use]
 extern crate serde_json;
-extern crate schema_derive;
+extern crate doodle_derive;
 
-pub use schema_derive::*;
+pub use doodle_derive::*;
 
 use self::serde_json::Value;
 use std::collections::HashMap;
