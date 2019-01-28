@@ -1,10 +1,16 @@
 #[macro_use]
 extern crate serde_json;
-extern crate doodle_derive;
 
+// Reexport doodle_derive
+#[cfg(feature = "doodle_derive")]
+#[macro_use]
+#[allow(unused_imports)]
+pub extern crate doodle_derive;
+
+#[cfg(feature = "doodle_derive")]
 pub use doodle_derive::*;
 
-use self::serde_json::Value;
+use serde_json::Value;
 use std::collections::HashMap;
 
 pub trait Schema {
@@ -13,11 +19,14 @@ pub trait Schema {
 
     /// Return a json representation of the schema
     fn get_fields_openapi() -> Value {
-        let map = Self::get_fields()
+        let properties = Self::get_fields()
             .iter()
-            .map(|x| *x)
             .map(|(k, v)| (k, json!({ "type": v })))
             .collect::<HashMap<_, _>>();
-        json!(map)
+        json!({
+            "type": "object",
+            "properties": properties
+        })
     }
 }
+

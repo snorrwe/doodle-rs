@@ -18,6 +18,7 @@ documentation = "https://github.com/snorrwe/doodle-rs"
 keywords = ["serialization"]
 
 [lib]
+name = "doodle_derive"
 proc-macro = true
 
 [dependencies]

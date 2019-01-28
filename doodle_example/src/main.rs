@@ -1,7 +1,7 @@
 extern crate doodle;
 extern crate serde_json;
 
-use doodle::*;
+use doodle::Schema;
 
 #[derive(Schema)]
 struct Foo {

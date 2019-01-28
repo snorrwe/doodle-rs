@@ -1,16 +1,16 @@
 #![crate_type = "proc-macro"]
 
-extern crate proc_macro;
-extern crate syn;
 #[macro_use]
 extern crate quote;
+extern crate proc_macro;
+extern crate syn;
 
 use self::proc_macro::TokenStream;
-use self::quote::ToTokens;
+use quote::ToTokens;
 use syn::{parse_macro_input, Data, DeriveInput, Fields};
 
 #[proc_macro_derive(Schema)]
-pub fn derive_dto_fn(input: TokenStream) -> TokenStream {
+pub fn derive_schema(input: TokenStream) -> TokenStream {
     // Construct a string representation of the type definition
     let input = parse_macro_input!(input as DeriveInput);
 

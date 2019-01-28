@@ -7,4 +7,4 @@ publish = false
 
 [dependencies]
 serde_json = "1.0.0"
-doodle = { path = "../doodle" }
+doodle = { path = "../doodle", features = ["derive"] }
