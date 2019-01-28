@@ -54,7 +54,6 @@ pub fn derive_dto_fn(input: TokenStream) -> TokenStream {
             }
         }
     };
-    // panic!("{:#?}", implementation);
     TokenStream::from(implementation)
 }
 

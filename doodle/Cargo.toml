@@ -3,7 +3,11 @@ name = "doodle"
 version = "0.1.0"
 authors = ["Daniel Kiss <littlesnorrboy@gmail.com>"]
 edition = "2018"
+include = [
+    "**/*.rs",
+    "Cargo.toml",
+]
 
 [dependencies]
 serde_json = "1.0"
-doodle_derive = { path = "../doodle_derive" }
+doodle_derive = { version="0.1.0", path = "../doodle_derive" }
