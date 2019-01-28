@@ -1,6 +1,6 @@
 [package]
 name = "doodle"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Daniel Kiss <littlesnorrboy@gmail.com>"]
 edition = "2018"
 include = [
@@ -17,9 +17,12 @@ repository = "https://github.com/snorrwe/doodle-rs"
 documentation = "https://snorrwe.github.io/doodle-rs/doodle/"
 keywords = ["serialization"]
 
+[badges]
+travis-ci = { repository = "snorrwe/doodle-rs", branch = "master" }
+
 [dependencies]
 serde_json = "1.0"
-doodle_derive = { version="0.1.1", path = "../doodle_derive", optional = true }
+doodle_derive = { version="0.1.2", path = "../doodle_derive", optional = true }
 
 [features]
 derive = ["doodle_derive"]
