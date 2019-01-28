@@ -66,7 +66,7 @@ __Outputs__
                 "type": "i32"
             },
             "epic": {
-                "type": "Vec < Tale >"
+                "type": "Vec < String >"
             }
         },
     }
