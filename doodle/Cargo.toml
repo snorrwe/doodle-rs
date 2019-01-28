@@ -14,7 +14,7 @@ license = "MIT"
 description = "Doodle is a Schema documentation helper library"
 homepage = "https://github.com/snorrwe/doodle-rs"
 repository = "https://github.com/snorrwe/doodle-rs"
-documentation = "https://github.com/snorrwe/doodle-rs"
+documentation = "https://snorrwe.github.io/doodle-rs/doodle/"
 keywords = ["serialization"]
 
 [dependencies]

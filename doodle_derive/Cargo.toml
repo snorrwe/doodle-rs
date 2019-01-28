@@ -14,7 +14,7 @@ license = "MIT"
 description = "Implementation of #[derive(Schema)]"
 homepage = "https://github.com/snorrwe/doodle-rs"
 repository = "https://github.com/snorrwe/doodle-rs"
-documentation = "https://github.com/snorrwe/doodle-rs"
+documentation = "https://snorrwe.github.io/doodle-rs/doodle_derive/"
 keywords = ["serialization"]
 
 [lib]
