@@ -28,6 +28,9 @@ serde_json = "1.0.0" # To pretty print our result
 __main.rs__:
 
 ```
+extern crate doodle;
+extern crate serde_json;
+
 use doodle::*;
 use serde_json::json;
 
