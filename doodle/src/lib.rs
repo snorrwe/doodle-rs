@@ -1,3 +1,13 @@
+//! # Doodle
+//!
+//! The *Doodle* library provides means for data structures to document themselves loosely
+//! following the [OpenAPI specification](https://swagger.io/docs/specification/) specification
+//!
+//! Types that implement the `Schema` trait can document themselves using the methods available.
+//! See the `Schema` trait for more info
+//!
+//! The crate also re-exports `doodle_derive` which provides the derive `Schema` which implements
+//! The neccessary methods to serialize the data structure
 #[macro_use]
 extern crate serde_json;
 
@@ -10,23 +20,6 @@ pub extern crate doodle_derive;
 #[cfg(feature = "doodle_derive")]
 pub use doodle_derive::*;
 
-use serde_json::Value;
-use std::collections::HashMap;
-
-pub trait Schema {
-    /// Return the (name, type) of every field
-    fn get_fields() -> &'static [(&'static str, &'static str)];
-
-    /// Return a json representation of the schema
-    fn get_fields_openapi() -> Value {
-        let properties = Self::get_fields()
-            .iter()
-            .map(|(k, v)| (k, json!({ "type": v })))
-            .collect::<HashMap<_, _>>();
-        json!({
-            "type": "object",
-            "properties": properties
-        })
-    }
-}
+pub mod traits;
+pub use self::traits::*;
 
