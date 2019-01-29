@@ -122,7 +122,9 @@ pub trait Schema: SchemaMeta {
 
     /// Append the definition of Self to an existing json dictionary
     fn append_to_schema(schema: &mut Map<String, Value>) {
-        schema.insert(Self::get_name().to_string(), Self::get_fields_openapi());
+        let key = Self::get_name().to_string();
+        let fields = Self::get_fields_openapi();
+        schema.insert(key, fields);
     }
 }
 

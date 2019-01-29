@@ -25,37 +25,26 @@ fn implement_derive_schema(input: DeriveInput) -> TokenStream {
         _ => panic!("Only structs are supported!"),
     };
     let fields = match fields {
-        Fields::Named(ref fields) => fields
-            .named
-            .iter()
-            .map(|field| {
-                (
-                    field
-                        .ident
-                        .clone()
-                        .expect("Unnamed fields are not supported"),
-                    field.ty.clone(),
-                )
-            })
-            .map(|(x, y)| {
-                let x = format!("{}", x);
-                let tt = y.into_token_stream();
-                let y = format!("{}", tt);
-                quote! {
-                    Field {
-                        name: #x,
-                        json_ty: #y,
-                    }
+        Fields::Named(ref fields) => fields.named.iter().cloned().map(|field| {
+            let x = field.ident.expect("Unnamed fields are not supported");
+            let y = field.ty;
+            let x = format!("{}", x);
+            let tt = y.into_token_stream();
+            let y = format!("{}", tt);
+            quote! {
+                Field {
+                    name: #x,
+                    json_ty: #y,
                 }
-            }),
+            }
+        }),
         _ => panic!("Only named fields are supported!"),
     };
     let diplay_name = format!("{}", name);
-    let implementation = quote!{
+    let implementation = quote! {
         impl #impl_generics SchemaMeta for #name #ty_generics #where_clause {
             fn get_fields() -> &'static [Field] {
-                const NAMES: &'static [Field] = &[#(#fields),*];
-                NAMES
+                &[#(#fields),*]
             }
 
             fn get_name() -> &'static str {
