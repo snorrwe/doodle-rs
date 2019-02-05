@@ -26,11 +26,24 @@ fn implement_derive_schema(input: DeriveInput) -> TokenStream {
     };
     let fields = match fields {
         Fields::Named(ref fields) => fields.named.iter().cloned().map(|field| {
+            // TODO: type should be an enum 
             let x = field.ident.expect("Unnamed fields are not supported");
             let y = field.ty;
             let x = format!("{}", x);
             let tt = y.into_token_stream();
-            let y = format!("{}", tt);
+            let mut y = format!("{}", tt);
+            y = match y.as_str() {
+                "usize" | "isize" | "i32" | "u32" | "i8" | "u8" | "i16" | "u16" | "i64" | "u64"
+                | "f32" | "f64" => "number".into(),
+                "String" | "str" => "string".into(),
+                _ => y,
+            };
+            if y.starts_with("Vec") {
+                let inner_type =
+                    y.split(|c| c == '<' || c == '>').collect::<Vec<_>>()[1].replace(' ', "");
+                // TODO: above matching for the inner type
+                y = format!("{}[]", inner_type);
+            }
             quote! {
                 Field {
                     name: #x,
