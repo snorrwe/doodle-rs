@@ -26,12 +26,12 @@
 //! #[derive(Schema)]
 //! struct Woods {
 //!     pub id: i32,
-//!     pub epic: Vec<Tale>,
+//!     pub epic: Vec<Vec<Tale>>,
 //! }
 //!
 //! #[derive(Schema)]
 //! struct Tale {
-//!     pub value: String,
+//!     pub value: Option<String>,
 //! }
 //!
 //! // Initialize an empty dict
@@ -51,25 +51,32 @@
 //!
 //!
 //! let expected = json! {{
-//!       "Tale": {
-//!         "type": "object",
-//!         "properties": {
-//!           "value": {
-//!             "type": "String"
-//!           }
-//!         },
-//!       },
-//!       "Woods": {
-//!         "type": "object",
-//!         "properties": {
-//!           "id": {
-//!             "type": "i32"
-//!           },
-//!           "epic": {
-//!             "type": "Vec < Tale >"
-//!           }
-//!         },
-//!       }
+//! "Tale": {                                         
+//!   "properties": {                                 
+//!     "value": {                                    
+//!       "type": "string",                            
+//!       "nullable": true
+//!     }                                             
+//!   },                                              
+//!   "type": "object"                                
+//! },                                                
+//! "Woods": {                                        
+//!   "properties": {                                 
+//!     "epic": {                                     
+//!       "items": {                                  
+//!         "items": {                                
+//!           "$ref": "#/components/schemas/Tale"     
+//!         },                                        
+//!         "type": "array"                           
+//!       },                                          
+//!       "type": "array"                             
+//!     },                                            
+//!     "id": {                                       
+//!       "type": "number"                            
+//!     }                                             
+//!   },                                              
+//!   "type": "object"                                
+//! }                                                 
 //! }};
 //!
 //! assert_eq!(expected, schema);
@@ -97,7 +104,7 @@ pub use doodle_derive::*;
 use serde_json::map::Map;
 use std::collections::HashMap;
 
-/// Used to retreive meta information for a struct
+/// Used to retreive meta information for a `struct`
 pub trait SchemaMeta {
     /// Return the (name, type) of every field
     fn get_fields() -> &'static [Field];
@@ -112,7 +119,7 @@ pub trait Schema: SchemaMeta {
     fn get_fields_openapi() -> Value {
         let properties = Self::get_fields()
             .iter()
-            .map(|f: &Field| (f.name, json!({ "type": f.json_ty })))
+            .map(|f: &Field| (f.name, f.json_ty.to_json()))
             .collect::<HashMap<_, _>>();
         json!({
             "type": "object",
@@ -132,6 +139,32 @@ pub trait Schema: SchemaMeta {
 #[derive(Debug, Clone)]
 pub struct Field {
     pub name: &'static str,
-    pub json_ty: &'static str,
+    pub json_ty: Type,
+}
+
+#[derive(Debug, Clone)]
+pub enum Type {
+    Simple(&'static str),
+    Ref(&'static str),
+    Array(&'static Type),
+    Nullable(&'static Type),
+}
+
+impl Type {
+    pub fn to_json(&self) -> Value {
+        match self {
+            Type::Array(inner_type) => json!({
+                "type": "array",
+                "items": inner_type.to_json()
+            }),
+            Type::Simple(ty) => json!({ "type": ty }),
+            Type::Ref(ty) => json!({ "$ref": format!("#/components/schemas/{}", ty) }),
+            Type::Nullable(ty) => {
+                let mut json = ty.to_json();
+                json["nullable"] = json!(true);
+                json
+            }
+        }
+    }
 }
 
