@@ -1,10 +1,10 @@
 # Doodle
 
 [![Build Status](https://travis-ci.org/snorrwe/doodle-rs.svg?branch=master)](https://travis-ci.org/snorrwe/doodle-rs)
-![[doodle](https://crates.io/crates/doodle)](https://img.shields.io/crates/v/doodle.svg?label=doodle)
-![[doodle_derive](https://crates.io/crates/doodle_derive)](https://img.shields.io/crates/v/doodle_derive.svg?label=doodle_derive)
-![[Documentation](https://docs.rs/doodle/)](https://docs.rs/doodle/badge.svg)
-![[Licence](https://github.com/snorrwe/doodle-rs/blob/master/LICENSE)](https://img.shields.io/github/license/snorrwe/doodle-rs.svg)
+[![doodle](https://img.shields.io/crates/v/doodle.svg?label=doodle)](https://crates.io/crates/doodle)
+[![doodle_derive](https://img.shields.io/crates/v/doodle_derive.svg?label=doodle_derive)](https://crates.io/crates/doodle_derive)
+[![Documentation](https://docs.rs/doodle/badge.svg)](https://docs.rs/doodle/)
+[![Licence](https://img.shields.io/github/license/snorrwe/doodle-rs.svg)](https://github.com/snorrwe/doodle-rs/blob/master/LICENSE)
 
 The *Doodle* library provides means for data structures to document themselves _loosely_
 following the [OpenAPI specification](https://swagger.io/docs/specification/) specification
