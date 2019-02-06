@@ -1,6 +1,6 @@
 [package]
 name = "doodle_derive"
-version = "0.1.2"
+version = "0.2.0"
 authors = ["Daniel Kiss <littlesnorrboy@gmail.com>"]
 edition = "2018"
 include = [
@@ -24,3 +24,4 @@ proc-macro = true
 [dependencies]
 syn = "0.15"
 quote = "0.6"
+proc-macro2 = "0.4.27"

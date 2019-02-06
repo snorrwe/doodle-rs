@@ -1,3 +1,3 @@
 # Doodle Derive
 
-**TBA**
+The derive macro for the `doodle` crate.

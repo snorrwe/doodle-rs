@@ -1,6 +1,6 @@
 [package]
 name = "doodle"
-version = "0.1.2"
+version = "0.2.0"
 authors = ["Daniel Kiss <littlesnorrboy@gmail.com>"]
 edition = "2018"
 include = [
@@ -22,7 +22,7 @@ travis-ci = { repository = "snorrwe/doodle-rs", branch = "master" }
 
 [dependencies]
 serde_json = "1.0"
-doodle_derive = { version="0.1.2", path = "../doodle_derive", optional = true }
+doodle_derive = { version="0.2.0", path = "../doodle_derive", optional = true }
 
 [features]
 derive = ["doodle_derive"]

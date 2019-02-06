@@ -29,15 +29,20 @@ __main.rs__:
 
 ```
 extern crate doodle;
+#[macro_use]
 extern crate serde_json;
 
 use doodle::*;
-use serde_json::json;
 
 #[derive(Schema)]
 struct Woods {
     pub id: i32,
-    pub epic: Vec<String>,
+    pub epic: Vec<Tale>,
+}
+
+#[derive(Schema)]
+struct Tale {
+    pub name: Option<String>,
 }
 
 fn main() {
@@ -47,28 +52,43 @@ fn main() {
 
     // Append our schemas
     Woods::append_to_schema(map);
+    Tale::append_to_schema(map);
 
-    // print the output
     let output = serde_json::to_string_pretty(&schema).unwrap();
     println!("Schema:\n\n{}", output);
 }
+
 ```
 
 
 __Outputs__
 
 ```
+Schema:
+
 {
-    "Woods": {
-        "type": "object",
-        "properties": {
-            "id": {
-                "type": "i32"
-            },
-            "epic": {
-                "type": "Vec < String >"
-            }
+  "Tale": {
+    "properties": {
+      "name": {
+        "nullable": true,
+        "type": "string"
+      }
+    },
+    "type": "object"
+  },
+  "Woods": {
+    "properties": {
+      "epic": {
+        "items": {
+          "$ref": "#/components/schemas/Tale"
         },
-    }
+        "type": "array"
+      },
+      "id": {
+        "type": "number"
+      }
+    },
+    "type": "object"
+  }
 }
 ```
